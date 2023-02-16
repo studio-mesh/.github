@@ -5,7 +5,7 @@ Issue: close #
 やったこと
 - sample
 
-別Issueで対応すること
+後回しにしたこと
 - sample
 
 ## Ready for Review チェックリスト
