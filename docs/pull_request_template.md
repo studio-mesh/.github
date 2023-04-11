@@ -11,7 +11,7 @@ Issue: close #
 ## テスト
 
 リリース後に実施するテスト
-- 
+- sample
 
 ## Ready for Review チェックリスト
 
