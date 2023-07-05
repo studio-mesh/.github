@@ -1,19 +1,12 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Bug
+about: Issue template for reporting bugs
 title: '[BUG] '
 labels: bug
 assignees: ''
 ---
 
 ## 不具合概要
-
-## 該当ページ
-
-## 発生環境
-
-- 環境：
-- 端末：
 
 ## 再現手順
 
@@ -23,7 +16,7 @@ assignees: ''
 
 ## 本来の挙動
 
-## 修正しないとどう困るか
+## 修正しないときの影響
 
 ## 原因
 
