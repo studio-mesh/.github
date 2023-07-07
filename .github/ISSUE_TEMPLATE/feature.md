@@ -1,20 +1,14 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: Feature
+about: Issue template for creating features
 title: '[FEAT] '
 labels: enhancement
 assignees: ''
 ---
 
-## Asana URL
-
-## 期限
-
 ## 概要
 
 ## 背景と目的
-
-## ゴール
 
 ## 仕様
 

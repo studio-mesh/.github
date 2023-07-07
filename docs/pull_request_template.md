@@ -1,29 +1,28 @@
 ## 概要
 
-Issue: close #
+Issue: close #xx
 
-やったこと
-- sample
+### やったこと
 
-後回しにしたこと
-- sample
+- [ ] sample
 
-## テスト
+### 後回しにしたこと
 
-リリース後に実施するテスト
-- sample
+- sample #xx
+
+## リリース後に実施するテスト
+
+- [ ] sample
 
 ## Ready for Review チェックリスト
 
-- [ ] PR名が作業の目的を表現している
-- [ ] PR名にFeat/#xxのPrefixがついている
-- [ ] ブランチ名は[ChatGPTが作成した](https://www.notion.so/smesh/branch-02473bd31dd74d5da9b29a33ea61d763)
-- [ ] README/docの追加・更新を完了済み
-- [ ] TODOおよび未対応箇所のIssuesを発行済み
-
-## テスト方法・確認環境
-
-```
-```
+- [ ] PR 名が作業の目的を表現している
+- [ ] PR 名に Feat/#xx の Prefix がついている
+- [ ] ブランチ名は[ChatGPT が作成した](https://www.notion.so/smesh/branch-02473bd31dd74d5da9b29a33ea61d763)
+- [ ] README/doc の追加・更新を完了済み
+- [ ] 全てのやったことにチェックがついている
+- [ ] コード内の TODO および後回しにしたことを issue として発行して、リンクを記載済み
 
 ## Memo
+
+- レビュワーへの参考情報（やったことの実装詳細、画面スクショなど）
