@@ -1,6 +1,6 @@
 ---
 name: Feature
-about: Issue template for creating ideas for additional features
+about: Issue template for creating features
 title: '[FEAT] '
 labels: enhancement
 assignees: ''
