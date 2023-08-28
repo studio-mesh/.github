@@ -8,7 +8,8 @@ Issue: close #xx
 
 ### 後回しにしたこと
 
-- sample #xx
+- sample
+  - #xx
 
 ## リリース後に実施するテスト
 
