@@ -18,7 +18,6 @@ Issue: close #xx
 
 - [ ] PR 名が作業の目的を表現している
 - [ ] PR 名に Feat/#xx の Prefix がついている
-- [ ] ブランチ名は[ChatGPT が作成した](https://www.notion.so/smesh/branch-02473bd31dd74d5da9b29a33ea61d763)
 - [ ] README/doc の追加・更新を完了済み
 - [ ] 全てのやったことにチェックがついている
 - [ ] コード内の TODO および後回しにしたことを issue として発行して、リンクを記載済み
