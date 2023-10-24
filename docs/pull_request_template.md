@@ -1,28 +1,30 @@
 ## 概要
 
-Issue: close #xx
+- 変更前：
+- 変更後：
+
+## 対象Issue
+
+close #
 
 ### やったこと
 
-- [ ] sample
+- 
 
 ### 後回しにしたこと
 
-- sample
-  - #xx
+- #
 
 ## リリース後に実施するテスト
 
-- [ ] sample
+- [ ] 
 
-## Ready for Review チェックリスト
+## PRチェックリスト
 
-- [ ] PR 名が作業の目的を表現している
-- [ ] PR 名に Feat/#xx の Prefix がついている
-- [ ] README/doc が適切な状態にある
-- [ ] コード内の TODO および後回しにしたことを issue として発行して、リンクを記載済み
-- [ ] CI が Pass している
+- [ ] PR タイトルが[規約](https://www.notion.so/smesh/fb831fedd74244138ffb10a4a546ab82?pvs=4#e3154e848a8446c999d9bc4491f11292)に従っている
+- [ ] コミットメッセージが[規約](https://www.notion.so/smesh/fb831fedd74244138ffb10a4a546ab82?pvs=4#ff01351c12ff4ba6880b615e6330a0e9)に従っている
+- [ ] README/doc が追加・更新が完了している（feature / fixの場合）
+- [ ] 必要なテストの追加・更新が完了している（feature / fixの場合）
+- [ ] コード内の TODO および後回しにした作業の issue 番号を記載済み
 
-## Memo
-
-- レビュワーへの参考情報（やったことの実装詳細、画面スクショなど）
+## 参考（実装詳細、画面スクショなど）
