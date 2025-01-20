@@ -4,6 +4,7 @@ about: バグ修正でも機能追加でもないコード変更
 title: '[refactor] '
 labels: refactoring
 assignees: ''
+projects: ["studio-mesh/20"]
 ---
 
 ## 概要
@@ -20,6 +21,6 @@ assignees: ''
 
 ## 関連 Issues
 
-- [ ] 
+- [ ]
 
 ## 参考

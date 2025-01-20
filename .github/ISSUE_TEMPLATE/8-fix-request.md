@@ -4,6 +4,7 @@ about: バグの修正
 title: '[fix] '
 labels: bug
 assignees: ''
+projects: ["studio-mesh/20"]
 ---
 
 ## 概要
@@ -21,6 +22,6 @@ assignees: ''
 
 ## 関連 Issues
 
-- [ ] 
+- [ ]
 
 ## 参考

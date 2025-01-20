@@ -4,6 +4,7 @@ about: 不足しているテストの追加や既存のテストの修正
 title: '[test] '
 labels: maintenance
 assignees: ''
+projects: ["studio-mesh/20"]
 ---
 
 ## 概要
@@ -20,6 +21,6 @@ assignees: ''
 
 ## 関連 Issues
 
-- [ ] 
+- [ ]
 
 ## 参考
