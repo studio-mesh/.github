@@ -4,6 +4,7 @@ about: 機能に影響を与えない変更（パラメータ変更やCI/CDの�
 title: '[chore] '
 labels: maintenance
 assignees: ''
+projects: ["studio-mesh/20"]
 ---
 
 ## 概要
@@ -20,6 +21,6 @@ assignees: ''
 
 ## 関連 Issues
 
-- [ ] 
+- [ ]
 
 ## 参考

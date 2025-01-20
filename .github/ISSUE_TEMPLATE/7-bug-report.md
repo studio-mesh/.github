@@ -4,6 +4,7 @@ about: バグの報告および原因調査（開発は行わない）
 title: '[bug] '
 labels: bug
 assignees: ''
+projects: ["studio-mesh/20"]
 ---
 
 ## 概要
@@ -11,7 +12,7 @@ assignees: ''
 
 ## 再現手順
 
-1. 
+1.
 
 ## 本来の挙動
 

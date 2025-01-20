@@ -4,6 +4,7 @@ about: パフォーマンスの改善
 title: '[perf] '
 labels: enhancement
 assignees: ''
+projects: ["studio-mesh/20"]
 ---
 
 ## 概要
@@ -20,6 +21,6 @@ assignees: ''
 
 ## 関連 Issues
 
-- [ ] 
+- [ ]
 
 ## 参考
