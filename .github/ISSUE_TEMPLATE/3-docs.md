@@ -4,7 +4,6 @@ about: ドキュメントの作成または変更
 title: '[docs] '
 labels: documentation
 assignees: ''
-projects: ["studio-mesh/20"]
 ---
 
 ## 概要
