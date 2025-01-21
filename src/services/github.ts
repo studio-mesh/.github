@@ -20,8 +20,8 @@ export class GitHubService {
    */
   async getAuthenticatedUserRepositories(): Promise<Repository[]> {
     const { data: repos } = await this.octokit.repos.listForAuthenticatedUser({
-      visibility: "all",  // パブリック・プライベート両方
-      affiliation: this.config.affiliation || "owner",  // デフォルトは個人アカウントのみ
+      visibility: "all", // パブリック・プライベート両方
+      affiliation: this.config.affiliation || "owner", // デフォルトは個人アカウントのみ
       sort: "updated",
       direction: "desc",
       per_page: 100,
@@ -36,7 +36,7 @@ export class GitHubService {
   /**
    * リポジトリ内のオープンIssueを取得
    */
-  async getOpenIssues(repo: Repository['name'], owner: Repository['owner']): Promise<Issue[]> {
+  async getOpenIssues(repo: Repository["name"], owner: Repository["owner"]): Promise<Issue[]> {
     const { data: issues } = await this.octokit.issues.listForRepo({
       owner: owner,
       repo: repo,

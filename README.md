@@ -74,20 +74,14 @@ npm start
 
 ## 環境変数
 
-| 変数名 | 説明 | 必須 | デフォルト値 |
-|--------|------|------|--------------|
-| GITHUB_OWNER | GitHubのオーナー（個人用：ユーザー名、組織用：組織名） | ✅ | - |
-| GITHUB_TOKEN | GitHubのPersonal Access Token（リポジトリ読み取り、プロジェクト書き込み権限が必要） | ✅ | - |
-| GITHUB_PROJECT_NUMBER | GitHubプロジェクトの番号 | - | 1 |
-| GITHUB_REPO_SCOPE | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | - | owner |
+| 変数名                | 説明                                                                                             | 必須 | デフォルト値 |
+| --------------------- | ------------------------------------------------------------------------------------------------ | ---- | ------------ |
+| GITHUB_OWNER          | GitHubのオーナー（個人用：ユーザー名、組織用：組織名）                                           | ✅    | -            |
+| GITHUB_TOKEN          | GitHubのPersonal Access Token（リポジトリ読み取り、プロジェクト書き込み権限が必要）              | ✅    | -            |
+| GITHUB_PROJECT_NUMBER | GitHubプロジェクトの番号                                                                         | -    | 1            |
+| GITHUB_REPO_SCOPE     | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | -    | owner        |
 
 ## 開発
-
-### テストの実行
-
-```bash
-npm test
-```
 
 ### リントの実行
 

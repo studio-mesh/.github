@@ -1,8 +1,9 @@
 import type { RestEndpointMethodTypes } from "@octokit/rest";
 
-export type RepositoryAffiliation = 'owner' | 'organization_member';
+export type RepositoryAffiliation = "owner" | "organization_member";
 
-export type OctokitRepo = RestEndpointMethodTypes["repos"]["listForAuthenticatedUser"]["response"]["data"][0];
+export type OctokitRepo =
+  RestEndpointMethodTypes["repos"]["listForAuthenticatedUser"]["response"]["data"][0];
 export type OctokitIssue = RestEndpointMethodTypes["issues"]["listForRepo"]["response"]["data"][0];
 
 export interface Config {
