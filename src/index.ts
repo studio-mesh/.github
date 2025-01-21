@@ -8,7 +8,7 @@ dotenv.config();
 /**
  * Issueの処理を実行
  */
-async function processIssues(config: Config) {
+const processIssues = async (config: Config) => {
   if (!config.token) {
     throw new Error("GITHUB_TOKEN is required");
   }
@@ -35,10 +35,10 @@ async function processIssues(config: Config) {
   }
 
   console.info("Successfully completed issue linking process");
-}
+};
 
 // メイン処理
-async function main() {
+const main = async () => {
   try {
     // 設定の初期化
     const config: Config = {
@@ -71,7 +71,7 @@ async function main() {
     console.error("Error occurred:", error);
     process.exit(1);
   }
-}
+};
 
 // プログラムの実行
 main();

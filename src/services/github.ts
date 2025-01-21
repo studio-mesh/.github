@@ -18,7 +18,7 @@ export class GitHubService {
    * - owner: 個人リポジトリ
    * - organization_member: 所属組織のリポジトリ
    */
-  async getAuthenticatedUserRepositories(): Promise<Repository[]> {
+  getAuthenticatedUserRepositories = async (): Promise<Repository[]> => {
     const { data: repos } = await this.octokit.repos.listForAuthenticatedUser({
       visibility: "all", // パブリック・プライベート両方
       affiliation: this.config.affiliation || "owner", // デフォルトは個人アカウントのみ
@@ -31,12 +31,15 @@ export class GitHubService {
       name: repo.name,
       owner: repo.owner.login,
     }));
-  }
+  };
 
   /**
    * リポジトリ内のオープンIssueを取得
    */
-  async getOpenIssues(repo: Repository["name"], owner: Repository["owner"]): Promise<Issue[]> {
+  getOpenIssues = async (
+    repo: Repository["name"],
+    owner: Repository["owner"]
+  ): Promise<Issue[]> => {
     const { data: issues } = await this.octokit.issues.listForRepo({
       owner: owner,
       repo: repo,
@@ -50,12 +53,12 @@ export class GitHubService {
       title: issue.title,
       repository: repo,
     }));
-  }
+  };
 
   /**
    * プロジェクトにIssueを追加
    */
-  async addIssueToProject(issue: Issue): Promise<void> {
+  addIssueToProject = async (issue: Issue): Promise<void> => {
     // GraphQL APIを使用してプロジェクトにIssueを追加
     const query = `
       mutation($projectId: ID!, $contentId: ID!) {
@@ -84,12 +87,12 @@ export class GitHubService {
       }
       throw error;
     }
-  }
+  };
 
   /**
    * プロジェクトIDを取得
    */
-  async getProjectId(): Promise<string> {
+  getProjectId = async (): Promise<string> => {
     const query = `
       query($username: String!, $number: Int!) {
         user(login: $username) {
@@ -106,5 +109,5 @@ export class GitHubService {
     });
 
     return response.user.projectV2.id;
-  }
+  };
 }
