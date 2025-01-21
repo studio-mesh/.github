@@ -1,4 +1,7 @@
 {
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "githubIssues.issueBranchTitle": "${sanitizedIssueTitle}#${issueNumber}",
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
 }
