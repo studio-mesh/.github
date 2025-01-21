@@ -54,7 +54,6 @@ async function main() {
       // リポジトリ取得のスコープ
       // - owner: 個人リポジトリ（デフォルト）
       // - organization_member: 所属組織のリポジトリ
-      // - collaborator: コラボレーターのリポジトリ
       affiliation: (process.env.GITHUB_REPO_SCOPE || 'owner') as RepositoryAffiliation,
     };
 

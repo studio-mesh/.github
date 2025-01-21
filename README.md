@@ -8,11 +8,11 @@
 
 # Issue Project Linker
 
-組織内の全リポジトリのオープンIssueを指定したGitHubプロジェクトに自動的に紐づけるツールです。
+指定したスコープ（個人、所属組織）のリポジトリのオープンIssueを指定したGitHubプロジェクトに自動的に紐づけるツールです。
 
 ## 機能
 
-- 組織内の全リポジトリのオープンIssueを取得
+- 指定したスコープのリポジトリのオープンIssueを取得
 - 指定したGitHubプロジェクトにIssueを自動追加
 - 重複追加の防止
 - GitHub Actionsによる自動実行（毎日）または手動実行
@@ -42,15 +42,14 @@ cp .env.example .env
 2. `.env`ファイルを編集し、必要な情報を設定
 ```env
 GITHUB_TOKEN=your_github_token_here
-ORGANIZATION=your_organization_name
-PROJECT_NUMBER=your_project_number
+GITHUB_OWNER=your_owner_name
+GITHUB_PROJECT_NUMBER=1
+GITHUB_REPO_SCOPE=owner
 ```
 
 ## 使用方法
 
 ### ローカルでの実行
-
-#### 組織用
 
 1. TypeScriptのビルド
 ```bash
@@ -60,18 +59,6 @@ npm run build
 2. スクリプトの実行
 ```bash
 npm start
-```
-
-#### 個人用
-
-1. TypeScriptのビルド
-```bash
-npm run build
-```
-
-2. スクリプトの実行
-```bash
-npm run start:personal
 ```
 
 ### GitHub Actionsでの実行
@@ -89,11 +76,10 @@ npm run start:personal
 
 | 変数名 | 説明 | 必須 | デフォルト値 |
 |--------|------|------|--------------|
-| GITHUB_TOKEN | GitHubのPersonal Access Token | ✅ | - |
-| ORGANIZATION | GitHubの組織名（組織用） | - | studio-mesh |
-| PROJECT_NUMBER | GitHubプロジェクトの番号（組織用） | - | 20 |
-| GITHUB_USERNAME | GitHubのユーザー名（個人用） | - | - |
-| PERSONAL_PROJECT_NUMBER | GitHubプロジェクトの番号（個人用） | - | 1 |
+| GITHUB_OWNER | GitHubのオーナー（個人用：ユーザー名、組織用：組織名） | ✅ | - |
+| GITHUB_TOKEN | GitHubのPersonal Access Token（リポジトリ読み取り、プロジェクト書き込み権限が必要） | ✅ | - |
+| GITHUB_PROJECT_NUMBER | GitHubプロジェクトの番号 | - | 1 |
+| GITHUB_REPO_SCOPE | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | - | owner |
 
 ## 開発
 

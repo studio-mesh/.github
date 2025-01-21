@@ -17,7 +17,6 @@ export class GitHubService {
    * affiliationパラメータで取得スコープを制御：
    * - owner: 個人リポジトリ
    * - organization_member: 所属組織のリポジトリ
-   * - collaborator: コラボレーターのリポジトリ
    */
   async getAuthenticatedUserRepositories(): Promise<Repository[]> {
     const { data: repos } = await this.octokit.repos.listForAuthenticatedUser({
