@@ -13,11 +13,11 @@ export class GitHubService {
   }
 
   /**
-   * 組織内の全リポジトリを取得
+   * リポジトリを取得（組織または個人）
    */
   async getOrganizationRepositories(): Promise<Repository[]> {
-    const { data: repos } = await this.octokit.repos.listForOrg({
-      org: this.config.organization,
+    const { data: repos } = await this.octokit.repos.listForUser({
+      username: this.config.organization,
       type: "all",
       per_page: 100,
     });
@@ -87,8 +87,8 @@ export class GitHubService {
    */
   async getProjectId(): Promise<string> {
     const query = `
-      query($org: String!, $number: Int!) {
-        organization(login: $org) {
+      query($username: String!, $number: Int!) {
+        user(login: $username) {
           projectV2(number: $number) {
             id
           }
@@ -97,7 +97,7 @@ export class GitHubService {
     `;
 
     interface ProjectResponse {
-      organization: {
+      user: {
         projectV2: {
           id: string;
         };
@@ -105,10 +105,10 @@ export class GitHubService {
     }
 
     const response: ProjectResponse = await this.octokit.graphql(query, {
-      org: this.config.organization,
+      username: this.config.organization,
       number: this.config.projectNumber,
     });
 
-    return response.organization.projectV2.id;
+    return response.user.projectV2.id;
   }
 }

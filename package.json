@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
+    "start:personal": "node dist/index-personal.js",
     "test": "node --test dist/**/*.test.js",
     "test:watch": "node --test --watch dist/**/*.test.js",
     "lint": "biome lint .",

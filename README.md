@@ -50,6 +50,8 @@ PROJECT_NUMBER=your_project_number
 
 ### ローカルでの実行
 
+#### 組織用
+
 1. TypeScriptのビルド
 ```bash
 npm run build
@@ -58,6 +60,18 @@ npm run build
 2. スクリプトの実行
 ```bash
 npm start
+```
+
+#### 個人用
+
+1. TypeScriptのビルド
+```bash
+npm run build
+```
+
+2. スクリプトの実行
+```bash
+npm run start:personal
 ```
 
 ### GitHub Actionsでの実行
@@ -76,8 +90,10 @@ npm start
 | 変数名 | 説明 | 必須 | デフォルト値 |
 |--------|------|------|--------------|
 | GITHUB_TOKEN | GitHubのPersonal Access Token | ✅ | - |
-| ORGANIZATION | GitHubの組織名 | - | studio-mesh |
-| PROJECT_NUMBER | GitHubプロジェクトの番号 | - | 20 |
+| ORGANIZATION | GitHubの組織名（組織用） | - | studio-mesh |
+| PROJECT_NUMBER | GitHubプロジェクトの番号（組織用） | - | 20 |
+| GITHUB_USERNAME | GitHubのユーザー名（個人用） | - | - |
+| PERSONAL_PROJECT_NUMBER | GitHubプロジェクトの番号（個人用） | - | 1 |
 
 ## 開発
 
