@@ -1,0 +1,31 @@
+name: Issue Project Linker
+
+on:
+  workflow_dispatch:  # 手動実行
+  schedule:
+    - cron: '0 0 * * *'  # 毎日00:00に実行
+
+jobs:
+  link-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORGANIZATION: 'studio-mesh'
+          PROJECT_NUMBER: '20'
+        run: npm start
