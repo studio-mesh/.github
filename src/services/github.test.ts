@@ -1,15 +1,15 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { GitHubService } from "./github.js";
-import { Config, Issue } from "../types.js";
+import { Config, Issue } from '../types.js';
 
 // モックの設定
 const mockOctokit = {
   repos: {
-    listForOrg: async () => ({
+    listForAuthenticatedUser: async () => ({
       data: [
-        { name: "repo1", node_id: "node1" },
-        { name: "repo2", node_id: "node2" },
+        { name: "repo1", node_id: "node1", owner: { login: "test-owner" } },
+        { name: "repo2", node_id: "node2", owner: { login: "test-owner" } },
       ],
     }),
   },
@@ -52,16 +52,17 @@ describe("GitHubService", async () => {
   const service = new GitHubService(mockConfig, MockOctokit);
 
   await it("リポジトリの一覧を取得できること", async () => {
-    const repos = await service.getOrganizationRepositories();
+    const repos = await service.getAuthenticatedUserRepositories();
     assert.equal(repos.length, 2);
     assert.deepEqual(repos[0], {
       name: "repo1",
       nodeId: "node1",
+      owner: "test-owner",
     });
   });
 
   await it("オープンIssueの一覧を取得できること", async () => {
-    const issues = await service.getOpenIssues("repo1");
+    const issues = await service.getOpenIssues("repo1", "test-owner");
     assert.equal(issues.length, 1);
     assert.deepEqual(issues[0], {
       id: 1,

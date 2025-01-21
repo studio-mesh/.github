@@ -13,27 +13,34 @@ export class GitHubService {
   }
 
   /**
-   * リポジトリを取得（組織または個人）
+   * リポジトリを取得
+   * affiliationパラメータで取得スコープを制御：
+   * - owner: 個人リポジトリ
+   * - organization_member: 所属組織のリポジトリ
+   * - collaborator: コラボレーターのリポジトリ
    */
-  async getOrganizationRepositories(): Promise<Repository[]> {
-    const { data: repos } = await this.octokit.repos.listForUser({
-      username: this.config.organization,
-      type: "all",
+  async getAuthenticatedUserRepositories(): Promise<Repository[]> {
+    const { data: repos } = await this.octokit.repos.listForAuthenticatedUser({
+      visibility: "all",  // パブリック・プライベート両方
+      affiliation: this.config.affiliation || "owner",  // デフォルトは個人アカウントのみ
+      sort: "updated",
+      direction: "desc",
       per_page: 100,
     });
 
-    return repos.map((repo: { name: string; node_id: string }) => ({
+    return repos.map((repo: { name: string; node_id: string; owner: { login: string } }) => ({
       name: repo.name,
       nodeId: repo.node_id,
+      owner: repo.owner.login,
     }));
   }
 
   /**
    * リポジトリ内のオープンIssueを取得
    */
-  async getOpenIssues(repo: Repository['name']): Promise<Issue[]> {
+  async getOpenIssues(repo: Repository['name'], owner: Repository['owner']): Promise<Issue[]> {
     const { data: issues } = await this.octokit.issues.listForRepo({
-      owner: this.config.organization,
+      owner: owner,
       repo: repo,
       state: "open",
       per_page: 100,
