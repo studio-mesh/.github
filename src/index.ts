@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
-import { Config, RepositoryAffiliation } from "./types.js";
 import { GitHubService } from "./services/github.js";
+import { Config, RepositoryAffiliation } from "./types.js";
 
 // 環境変数の読み込み
 dotenv.config();
