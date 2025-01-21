@@ -5,6 +5,7 @@
   },
   "linter": {
     "enabled": true,
+    "ignore": [".vscode/**", "dist/**"],
     "rules": {
       "recommended": true,
       "correctness": {
