@@ -1,21 +1,19 @@
 {
   "name": "issue-project-linker",
   "version": "1.0.0",
-  "description": "GitHub Issues to Project linker",
+  "private": true,
+  "description": "Automatically link GitHub Issues to Projects based on repository affiliations",
   "main": "dist/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "start:personal": "node dist/index-personal.js",
-    "test": "node --test dist/**/*.test.js",
-    "test:watch": "node --test --watch dist/**/*.test.js",
     "lint": "biome lint .",
     "format": "biome format . --write"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@octokit/rest": "^20.0.2",
     "@actions/core": "^1.10.1",
