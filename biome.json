@@ -8,14 +8,32 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "error",
+        "noUndeclaredVariables": "error",
+        "useHookAtTopLevel": "error",
+        "noConstAssign": "error"
       },
       "suspicious": {
-        "noExplicitAny": "error"
+        "noExplicitAny": "error",
+        "noDoubleEquals": "error",
+        "noEmptyInterface": "error",
+        "noConsoleLog": "warn"
       },
       "style": {
         "useConst": "error",
-        "useTemplate": "error"
+        "useTemplate": "error",
+        "noNonNullAssertion": "error",
+        "noParameterAssign": "error",
+        "useShorthandArrayType": "error"
+      },
+      "complexity": {
+        "noForEach": "warn",
+        "noStaticOnlyClass": "error",
+        "noBannedTypes": "error",
+        "noUselessConstructor": "error"
+      },
+      "performance": {
+        "noDelete": "error"
       }
     }
   },
@@ -23,13 +41,16 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 100
+    "lineWidth": 100,
+    "formatWithErrors": false,
+    "include": ["**/*.js", "**/*.ts", "**/*.tsx", "**/*.json"]
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "double",
       "trailingComma": "es5",
-      "semicolons": "always"
+      "semicolons": "always",
+      "arrowParentheses": "always"
     }
   }
 }
