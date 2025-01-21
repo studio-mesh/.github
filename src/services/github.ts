@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import { Config, Issue, Repository } from "../types.js";
+import { Config, Issue, Repository, OctokitRepo, OctokitIssue, ProjectResponse } from "../types.js";
 
 export class GitHubService {
   private octokit: Octokit;
@@ -28,9 +28,8 @@ export class GitHubService {
       per_page: 100,
     });
 
-    return repos.map((repo: { name: string; node_id: string; owner: { login: string } }) => ({
+    return repos.map((repo: OctokitRepo) => ({
       name: repo.name,
-      nodeId: repo.node_id,
       owner: repo.owner.login,
     }));
   }
@@ -46,8 +45,7 @@ export class GitHubService {
       per_page: 100,
     });
 
-    return issues.map((issue: { id: number; node_id: string; number: number; title: string }) => ({
-      id: issue.id,
+    return issues.map((issue: OctokitIssue) => ({
       nodeId: issue.node_id,
       number: issue.number,
       title: issue.title,
@@ -102,14 +100,6 @@ export class GitHubService {
         }
       }
     `;
-
-    interface ProjectResponse {
-      user: {
-        projectV2: {
-          id: string;
-        };
-      };
-    }
 
     const response: ProjectResponse = await this.octokit.graphql(query, {
       username: this.config.organization,

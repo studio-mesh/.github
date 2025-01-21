@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { Config } from './types.js';
+import { Config, RepositoryAffiliation } from './types.js';
 import { GitHubService } from './services/github.js';
 
 // 環境変数の読み込み
@@ -55,7 +55,7 @@ async function main() {
       // - owner: 個人リポジトリ（デフォルト）
       // - organization_member: 所属組織のリポジトリ
       // - collaborator: コラボレーターのリポジトリ
-      affiliation: process.env.GITHUB_REPO_SCOPE || 'owner',
+      affiliation: (process.env.GITHUB_REPO_SCOPE || 'owner') as RepositoryAffiliation,
     };
 
     // 必須パラメータのチェック
