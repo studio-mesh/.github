@@ -22,8 +22,6 @@ export class GitHubService {
     const { data: repos } = await this.octokit.repos.listForAuthenticatedUser({
       visibility: "all", // パブリック・プライベート両方
       affiliation: this.config.affiliation || "owner", // デフォルトは個人アカウントのみ
-      sort: "updated",
-      direction: "desc",
       per_page: 100,
     });
 
