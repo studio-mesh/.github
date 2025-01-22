@@ -39,7 +39,7 @@
    ```env
    GITHUB_TOKEN=your_github_token_here
    ORGANIZATION_NAME=your_owner_name
-   PROJECT_NUMBER=1
+   PROJECT_NUMBER=your_project_number
    REPOSITORY_SCOPE=owner
    ```
 
