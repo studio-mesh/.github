@@ -6,9 +6,9 @@ import type { Config, RepositoryAffiliation } from "./types.js";
 dotenv.config();
 
 /**
- * Issueの処理を実行
+ * リポジトリのIssueをプロジェクトにリンクする
  */
-const processIssues = async (config: Config) => {
+const linkIssuesToProject = async (config: Config) => {
   if (!config.token) {
     throw new Error("GITHUB_TOKEN is required");
   }
@@ -66,7 +66,7 @@ const main = async () => {
       throw new Error("GITHUB_TOKEN is required");
     }
 
-    await processIssues(config);
+    await linkIssuesToProject(config);
   } catch (error) {
     console.error("Error occurred:", error);
     process.exit(1);
