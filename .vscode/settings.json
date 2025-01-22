@@ -1,3 +1,11 @@
 {
-  "editor.formatOnSave": false
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "githubIssues.issueBranchTitle": "${sanitizedIssueTitle}#${issueNumber}",
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
 }

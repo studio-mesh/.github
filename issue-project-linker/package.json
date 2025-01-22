@@ -1,0 +1,28 @@
+{
+  "name": "issue-project-linker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automatically link GitHub Issues to Projects based on repository affiliations",
+  "main": "dist/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "npm run lint && npm run format && tsc",
+    "start": "node dist/index.js",
+    "lint": "biome lint .",
+    "format": "biome format . --write"
+  },
+  "dependencies": {
+    "@octokit/rest": "^21.1.0",
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3"
+  }
+}

@@ -1,0 +1,35 @@
+name: Issue Project Linker
+
+on:
+  workflow_dispatch:  # 手動実行
+  schedule:
+    - cron: '0 15 * * *'  # 日本時間00:00（UTC 15:00）に実行
+
+jobs:
+  link-issues:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./issue-project-linker
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run script
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ORGANIZATION_NAME: ${{ vars.ORGANIZATION_NAME }}
+          PROJECT_NUMBER: ${{ vars.PROJECT_NUMBER }}
+          REPOSITORY_SCOPE: ${{ vars.REPOSITORY_SCOPE }}
+        run: npm start
