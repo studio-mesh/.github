@@ -8,6 +8,9 @@ on:
 jobs:
   link-issues:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./issue-project-linker
     steps:
       - uses: actions/checkout@v4
 
@@ -25,7 +28,8 @@ jobs:
 
       - name: Run script
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ORGANIZATION: 'studio-mesh'
-          PROJECT_NUMBER: '20'
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_OWNER: ${{ vars.GITHUB_OWNER }}
+          GITHUB_PROJECT_NUMBER: ${{ vars.GITHUB_PROJECT_NUMBER }}
+          GITHUB_REPO_SCOPE: ${{ vars.GITHUB_REPO_SCOPE }}
         run: npm start

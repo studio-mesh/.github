@@ -66,6 +66,17 @@
    - GitHubリポジトリの"Actions"タブから手動で実行できます
    - "Issue Project Linker"ワークフローを選択し、"Run workflow"をクリック
 
+### GitHub Actionsの設定
+
+1. GitHubリポジトリの"Settings"タブを開く
+2. "Security" > "Secrets and variables" > "Actions"を選択
+3. "Variables"タブで以下の変数を設定：
+   - `GITHUB_OWNER`: GitHubのオーナー名
+   - `GITHUB_PROJECT_NUMBER`: GitHubプロジェクトの番号
+   - `GITHUB_REPO_SCOPE`: リポジトリ取得のスコープ
+
+注意: GitHub Actionsで実行する場合、`GITHUB_TOKEN`は自動的に提供されるため、別途設定する必要はありません。
+
 ## 環境変数
 
 | 変数名                | 説明                                                                                             | 必須 | デフォルト値 |
