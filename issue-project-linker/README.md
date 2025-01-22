@@ -73,6 +73,24 @@ npm start
 | GITHUB_PROJECT_NUMBER | GitHubプロジェクトの番号                                                                         | -    | 1            |
 | GITHUB_REPO_SCOPE     | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | -    | owner        |
 
+## 開発環境のセットアップ
+
+プロジェクトのビルドと開発を行うためには、以下の2つの場所でnpm installを実行する必要があります：
+
+1. ルートディレクトリ（Biomeの設定用）
+```bash
+cd /home/vagrant/git/.github
+npm install
+```
+
+2. プロジェクトディレクトリ
+```bash
+cd /home/vagrant/git/.github/issue-project-linker
+npm install
+```
+
+これにより、Biomeによるリントとフォーマット、およびTypeScriptのビルドが正常に実行できるようになります。
+
 ## 開発
 
 ### リントの実行

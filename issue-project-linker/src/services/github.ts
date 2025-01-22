@@ -1,5 +1,12 @@
 import { Octokit } from "@octokit/rest";
-import { Config, Issue, OctokitIssue, OctokitRepo, ProjectResponse, Repository } from "../types.js";
+import type {
+  Config,
+  Issue,
+  OctokitIssue,
+  OctokitRepo,
+  ProjectResponse,
+  Repository,
+} from "../types.js";
 
 export class GitHubService {
   private octokit: Octokit;
