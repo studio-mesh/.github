@@ -29,7 +29,7 @@ jobs:
       - name: Run script
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          GITHUB_OWNER: ${{ vars.GITHUB_OWNER }}
-          GITHUB_PROJECT_NUMBER: ${{ vars.GITHUB_PROJECT_NUMBER }}
-          GITHUB_REPO_SCOPE: ${{ vars.GITHUB_REPO_SCOPE }}
+          ORGANIZATION_NAME: ${{ vars.ORGANIZATION_NAME }}
+          PROJECT_NUMBER: ${{ vars.PROJECT_NUMBER }}
+          REPOSITORY_SCOPE: ${{ vars.REPOSITORY_SCOPE }}
         run: npm start

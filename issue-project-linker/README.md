@@ -38,9 +38,9 @@
    ```
    ```env
    GITHUB_TOKEN=your_github_token_here
-   GITHUB_OWNER=your_owner_name
-   GITHUB_PROJECT_NUMBER=1
-   GITHUB_REPO_SCOPE=owner
+   ORGANIZATION_NAME=your_owner_name
+   PROJECT_NUMBER=1
+   REPOSITORY_SCOPE=owner
    ```
 
 ### 2. ビルドと実行
@@ -71,20 +71,20 @@
 1. GitHubリポジトリの"Settings"タブを開く
 2. "Security" > "Secrets and variables" > "Actions"を選択
 3. "Variables"タブで以下の変数を設定：
-   - `GITHUB_OWNER`: GitHubのオーナー名
-   - `GITHUB_PROJECT_NUMBER`: GitHubプロジェクトの番号
-   - `GITHUB_REPO_SCOPE`: リポジトリ取得のスコープ
+   - `ORGANIZATION_NAME`: GitHubのオーナー名
+   - `PROJECT_NUMBER`: GitHubプロジェクトの番号
+   - `REPOSITORY_SCOPE`: リポジトリ取得のスコープ
 
 注意: GitHub Actionsで実行する場合、`GITHUB_TOKEN`は自動的に提供されるため、別途設定する必要はありません。
 
 ## 環境変数
 
-| 変数名                | 説明                                                                                             | 必須 | デフォルト値 |
-| --------------------- | ------------------------------------------------------------------------------------------------ | ---- | ------------ |
-| GITHUB_OWNER          | GitHubのオーナー（個人用：ユーザー名、組織用：組織名）                                           | ✅    | -            |
-| GITHUB_TOKEN          | GitHubのPersonal Access Token（リポジトリ読み取り、プロジェクト書き込み権限が必要）              | ✅    | -            |
-| GITHUB_PROJECT_NUMBER | GitHubプロジェクトの番号                                                                         | -    | 1            |
-| GITHUB_REPO_SCOPE     | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | -    | owner        |
+| 変数名            | 説明                                                                                             | 必須 | デフォルト値 |
+| ----------------- | ------------------------------------------------------------------------------------------------ | ---- | ------------ |
+| ORGANIZATION_NAME | GitHubのオーナー（個人用：ユーザー名、組織用：組織名）                                           | ✅    | -            |
+| GITHUB_TOKEN      | GitHubのPersonal Access Token（リポジトリ読み取り、プロジェクト書き込み権限が必要）              | ✅    | -            |
+| PROJECT_NUMBER    | GitHubプロジェクトの番号                                                                         | -    | 1            |
+| REPOSITORY_SCOPE  | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | -    | owner        |
 
 ## 開発
 
