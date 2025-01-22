@@ -9,51 +9,53 @@
 - 重複追加の防止
 - GitHub Actionsによる自動実行（毎日）または手動実行
 
-## セットアップ
-
-### 必要条件
+## 必要条件
 
 - Node.js 20.x
 - npm
 - GitHub Personal Access Token（`repo`と`project`スコープが必要）
 
-### インストール
+## セットアップ
 
-```bash
-# 依存関係のインストール
-npm install
-```
+### 1. プロジェクトのセットアップ
 
-### 環境変数の設定
+1. 依存関係のインストール
+   ```bash
+   # Biomeの設定用（ルートディレクトリ）
+   npm install
 
-1. `.env.example`を`.env`にコピー
-```bash
-cp .env.example .env
-```
+   # プロジェクトの依存関係
+   cd issue-project-linker
+   npm install
+   ```
 
-2. `.env`ファイルを編集し、必要な情報を設定
-```env
-GITHUB_TOKEN=your_github_token_here
-GITHUB_OWNER=your_owner_name
-GITHUB_PROJECT_NUMBER=1
-GITHUB_REPO_SCOPE=owner
-```
+2. 環境変数の設定
+   ```bash
+   # .env.exampleを.envにコピー
+   cp .env.example .env
 
-## 使用方法
+   # .envファイルを編集し、必要な情報を設定
+   ```
+   ```env
+   GITHUB_TOKEN=your_github_token_here
+   GITHUB_OWNER=your_owner_name
+   GITHUB_PROJECT_NUMBER=1
+   GITHUB_REPO_SCOPE=owner
+   ```
 
-### ローカルでの実行
+### 2. ビルドと実行
 
 1. TypeScriptのビルド
-```bash
-npm run build
-```
+   ```bash
+   npm run build
+   ```
 
 2. スクリプトの実行
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
-### GitHub Actionsでの実行
+## GitHub Actionsでの実行
 
 このツールは以下の2つの方法で実行できます：
 
@@ -72,24 +74,6 @@ npm start
 | GITHUB_TOKEN          | GitHubのPersonal Access Token（リポジトリ読み取り、プロジェクト書き込み権限が必要）              | ✅    | -            |
 | GITHUB_PROJECT_NUMBER | GitHubプロジェクトの番号                                                                         | -    | 1            |
 | GITHUB_REPO_SCOPE     | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | -    | owner        |
-
-## 開発環境のセットアップ
-
-プロジェクトのビルドと開発を行うためには、以下の2つの場所でnpm installを実行する必要があります：
-
-1. ルートディレクトリ（Biomeの設定用）
-```bash
-cd /home/vagrant/git/.github
-npm install
-```
-
-2. プロジェクトディレクトリ
-```bash
-cd /home/vagrant/git/.github/issue-project-linker
-npm install
-```
-
-これにより、Biomeによるリントとフォーマット、およびTypeScriptのビルドが正常に実行できるようになります。
 
 ## 開発
 
