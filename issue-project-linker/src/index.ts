@@ -43,10 +43,10 @@ const main = async () => {
     // 設定の初期化
     const config: Config = {
       // GitHubのオーナー（ユーザー名または組織名）
-      organization: process.env.GITHUB_OWNER || "",
+      organization: process.env.ORGANIZATION_NAME || "",
 
       // GitHubプロジェクト番号
-      projectNumber: Number(process.env.GITHUB_PROJECT_NUMBER || "1"),
+      projectNumber: Number(process.env.PROJECT_NUMBER || "1"),
 
       // GitHubトークン
       token: process.env.GITHUB_TOKEN || "",
@@ -54,12 +54,12 @@ const main = async () => {
       // リポジトリ取得のスコープ
       // - owner: 個人リポジトリ（デフォルト）
       // - organization_member: 所属組織のリポジトリ
-      affiliation: (process.env.GITHUB_REPO_SCOPE || "owner") as RepositoryAffiliation,
+      affiliation: (process.env.REPOSITORY_SCOPE || "owner") as RepositoryAffiliation,
     };
 
     // 必須パラメータのチェック
     if (!config.organization) {
-      throw new Error("GITHUB_OWNER is required");
+      throw new Error("ORGANIZATION_NAME is required");
     }
 
     if (!config.token) {
