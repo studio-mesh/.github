@@ -68,14 +68,40 @@
 
 ### GitHub Actionsの設定
 
-1. GitHubリポジトリの"Settings"タブを開く
-2. "Security" > "Secrets and variables" > "Actions"を選択
-3. "Variables"タブで以下の変数を設定：
-   - `ORGANIZATION_NAME`: GitHubのオーナー名
-   - `PROJECT_NUMBER`: GitHubプロジェクトの番号
-   - `REPOSITORY_SCOPE`: リポジトリ取得のスコープ
+1. GitHub Appの作成
+   1. GitHubの設定画面へアクセス
+      - プロファイル写真 > Your organizations > 組織の Settings
+   2. Developer settings > GitHub Apps > New GitHub App をクリック
+   3. アプリの基本情報を設定
+      - GitHub App name: アプリの名前を入力
+      - Homepage URL: リポジトリのURLまたは所有者のプロフィールURL
+   4. 権限の設定
+      - Repository permissions:
+        - Contents: Read-only
+        - Projects: Read & write
+   5. Create GitHub App をクリック
 
-注意: GitHub Actionsで実行する場合、`GITHUB_TOKEN`は自動的に提供されるため、別途設定する必要はありません。
+2. 秘密鍵の生成
+   - GitHub Appの設定ページで Private keys セクションを開く
+   - Generate a private key をクリックして秘密鍵を生成・ダウンロード
+
+3. GitHub Appのインストール
+   - GitHub Appの設定ページで Install App タブをクリック
+   - インストール先の組織を選択
+   - Repository access で このリポジトリを選択
+   - Install をクリック
+
+4. シークレットと変数の設定
+   - リポジトリの"Settings" > "Security" > "Secrets and variables" > "Actions"を選択
+   - シークレットの設定：
+     - `APP_PRIVATE_KEY`: ダウンロードした秘密鍵の内容
+   - 変数の設定：
+     - `APP_ID`: GitHub AppのApp ID
+     - `ORGANIZATION_NAME`: GitHubのオーナー名
+     - `PROJECT_NUMBER`: GitHubプロジェクトの番号
+     - `REPOSITORY_SCOPE`: リポジトリ取得のスコープ
+
+注意: GitHub Actionsで実行する場合、GitHub Appによって自動的に発行される`GITHUB_TOKEN`が提供されるため、別途設定する必要はありません。このトークンには実行に必要な権限が付与されています。
 
 ## 環境変数
 
