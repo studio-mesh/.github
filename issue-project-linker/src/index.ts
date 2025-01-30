@@ -10,7 +10,7 @@ dotenv.config();
  */
 const linkIssuesToProject = async (config: Config) => {
   if (!config.token) {
-    throw new Error("GITHUB_TOKEN is required");
+    throw new Error("PAT_GITHUB is required");
   }
 
   const githubService = new GitHubService(config);
@@ -49,7 +49,7 @@ const main = async () => {
       projectNumber: Number(process.env.PROJECT_NUMBER),
 
       // GitHubトークン
-      token: process.env.GITHUB_TOKEN || "",
+      token: process.env.PAT_GITHUB || "",
 
       // リポジトリ取得のスコープ
       // - owner: 個人リポジトリ
@@ -63,7 +63,7 @@ const main = async () => {
     }
 
     if (!config.token) {
-      throw new Error("GITHUB_TOKEN is required");
+      throw new Error("PAT_GITHUB is required");
     }
 
     if (!process.env.PROJECT_NUMBER) {

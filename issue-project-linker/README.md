@@ -37,7 +37,7 @@
    # .envファイルを編集し、必要な情報を設定
    ```
    ```env
-   GITHUB_TOKEN=your_github_token_here
+   PAT_GITHUB=your_github_token_here
    ORGANIZATION_NAME=your_owner_name
    PROJECT_NUMBER=your_project_number
    REPOSITORY_SCOPE=owner
@@ -71,7 +71,7 @@
 1. シークレットと変数の設定
    - リポジトリの"Settings" > "Security" > "Secrets and variables" > "Actions"を選択
    - シークレットの設定:
-     - `GITHUB_TOKEN`: GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要)
+     - `PAT_GITHUB`: GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要)
    - 変数の設定:
      - `ORGANIZATION_NAME`: GitHubのオーナー名(変数として設定)
      - `PROJECT_NUMBER`: GitHubプロジェクトの番号(変数として設定)
@@ -84,7 +84,7 @@
 | 変数名            | 説明                                                                                           | 必須 |
 | ----------------- | ---------------------------------------------------------------------------------------------- | ---- |
 | ORGANIZATION_NAME | GitHubのオーナー(個人用:ユーザー名、組織用:組織名)                                             | ✅    |
-| GITHUB_TOKEN      | GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要)              | ✅    |
+| PAT_GITHUB        | GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要)              | ✅    |
 | PROJECT_NUMBER    | GitHubプロジェクトの番号                                                                       | ✅    |
 | REPOSITORY_SCOPE  | リポジトリ取得のスコープ(owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可) | ✅    |
 
@@ -93,9 +93,9 @@
 #### シークレットとして設定が必要な変数
 セキュリティ上重要な情報のため、シークレットとして設定する必要があります。
 
-| 変数名       | 説明                                                                              | 必須 |
-| ------------ | --------------------------------------------------------------------------------- | ---- |
-| GITHUB_TOKEN | GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要) | ✅    |
+| 変数名     | 説明                                                                              | 必須 |
+| ---------- | --------------------------------------------------------------------------------- | ---- |
+| PAT_GITHUB | GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要) | ✅    |
 
 #### 変数として設定が必要な変数
 公開しても問題ない設定値のため、変数として設定します。
