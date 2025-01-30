@@ -137,13 +137,11 @@
 
 ## 開発
 
-### リントの実行
+### 開発コマンド
 
 ```bash
-npm run lint
-```
+# ビルド(フォーマット、リント、TypeScriptコンパイル)
+npm run build
 
-### コードのフォーマット
-
-```bash
-npm run format
+# 実行
+npm start
