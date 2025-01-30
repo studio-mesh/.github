@@ -12,9 +12,9 @@ export class GitHubService {
   private octokit: Octokit;
   private config: Config;
 
-  constructor(config: Config, OctokitClass: typeof Octokit = Octokit) {
+  constructor(config: Config) {
     this.config = config;
-    this.octokit = new OctokitClass({
+    this.octokit = new Octokit({
       auth: config.token,
     });
   }
