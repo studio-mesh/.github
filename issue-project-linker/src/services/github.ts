@@ -21,9 +21,11 @@ export class GitHubService {
 
   /**
    * リポジトリを取得
-   * affiliationパラメータで取得スコープを制御：
+   * affiliationパラメータで取得スコープを制御:
    * - owner: 個人リポジトリ
    * - organization_member: 所属組織のリポジトリ
+   *
+   * アーカイブされたリポジトリは除外
    */
   getAuthenticatedUserRepositories = async (): Promise<Repository[]> => {
     const { data: repos } = await this.octokit.repos.listForAuthenticatedUser({
@@ -32,10 +34,12 @@ export class GitHubService {
       per_page: 100,
     });
 
-    return repos.map((repo: OctokitRepo) => ({
-      name: repo.name,
-      owner: repo.owner.login,
-    }));
+    return repos
+      .filter((repo: OctokitRepo) => !repo.archived) // アーカイブされたリポジトリを除外
+      .map((repo: OctokitRepo) => ({
+        name: repo.name,
+        owner: repo.owner.login,
+      }));
   };
 
   /**
