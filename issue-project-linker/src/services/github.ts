@@ -56,12 +56,14 @@ export class GitHubService {
       per_page: 100,
     });
 
-    return issues.map((issue: OctokitIssue) => ({
-      nodeId: issue.node_id,
-      number: issue.number,
-      title: issue.title,
-      repository: repo,
-    }));
+    return issues
+      .filter((issue: OctokitIssue) => !issue.pull_request) // プルリクエストを除外
+      .map((issue: OctokitIssue) => ({
+        nodeId: issue.node_id,
+        number: issue.number,
+        title: issue.title,
+        repository: repo,
+      }));
   };
 
   /**
