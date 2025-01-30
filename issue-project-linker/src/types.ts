@@ -10,7 +10,7 @@ export interface Config {
   token: string;
   organization: string;
   projectNumber: number;
-  affiliation?: RepositoryAffiliation;
+  affiliation: RepositoryAffiliation;
 }
 
 export interface Repository {

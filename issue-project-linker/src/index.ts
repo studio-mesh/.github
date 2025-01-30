@@ -46,15 +46,15 @@ const main = async () => {
       organization: process.env.ORGANIZATION_NAME || "",
 
       // GitHubプロジェクト番号
-      projectNumber: Number(process.env.PROJECT_NUMBER || "1"),
+      projectNumber: Number(process.env.PROJECT_NUMBER),
 
       // GitHubトークン
       token: process.env.GITHUB_TOKEN || "",
 
       // リポジトリ取得のスコープ
-      // - owner: 個人リポジトリ（デフォルト）
+      // - owner: 個人リポジトリ
       // - organization_member: 所属組織のリポジトリ
-      affiliation: (process.env.REPOSITORY_SCOPE || "owner") as RepositoryAffiliation,
+      affiliation: process.env.REPOSITORY_SCOPE as RepositoryAffiliation,
     };
 
     // 必須パラメータのチェック
@@ -64,6 +64,14 @@ const main = async () => {
 
     if (!config.token) {
       throw new Error("GITHUB_TOKEN is required");
+    }
+
+    if (!process.env.PROJECT_NUMBER) {
+      throw new Error("PROJECT_NUMBER is required");
+    }
+
+    if (!process.env.REPOSITORY_SCOPE) {
+      throw new Error("REPOSITORY_SCOPE is required");
     }
 
     await linkIssuesToProject(config);

@@ -28,7 +28,7 @@ export class GitHubService {
   getAuthenticatedUserRepositories = async (): Promise<Repository[]> => {
     const { data: repos } = await this.octokit.repos.listForAuthenticatedUser({
       visibility: "all", // パブリック・プライベート両方
-      affiliation: this.config.affiliation || "owner", // デフォルトは個人アカウントのみ
+      affiliation: this.config.affiliation,
       per_page: 100,
     });
 
