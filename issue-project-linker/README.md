@@ -13,7 +13,22 @@
 
 - Node.js 20.x
 - npm
-- GitHub Personal Access Token（`repo`と`project`スコープが必要）
+- GitHub Personal Access Token(`repo`と`project`スコープが必要)
+
+## Personal Access Tokenの作成手順
+
+1. GitHubにログインし、右上のプロフィールアイコンから"Settings"を選択
+2. 左サイドバーの一番下にある"Developer settings"をクリック
+3. 左サイドバーの"Personal access tokens" > "Tokens (classic)"を選択
+4. "Generate new token"から"Generate new token (classic)"をクリック
+5. 以下の設定で新しいトークンを生成:
+   - Note: 任意の名前(例:Issue Project Linker)
+   - Expiration: トークンの有効期限を選択
+   - Select scopes:
+     - `repo`: すべてにチェック
+     - `project`: すべてにチェック
+6. "Generate token"をクリックしてトークンを生成
+7. 生成されたトークンを安全な場所に保存(この画面を閉じると二度とトークンを表示できません)
 
 ## セットアップ
 
