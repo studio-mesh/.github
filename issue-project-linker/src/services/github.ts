@@ -56,12 +56,17 @@ export class GitHubService {
       per_page: 100,
     });
 
-    return issues.map((issue: OctokitIssue) => ({
-      nodeId: issue.node_id,
-      number: issue.number,
-      title: issue.title,
-      repository: repo,
-    }));
+    return (
+      issues
+        // GitHub APIの仕様上、アサイン済みの場合はstate:openを指定してもclosedも含まれるため、明示的にフィルタリング
+        .filter((issue: OctokitIssue) => issue.state === "open")
+        .map((issue: OctokitIssue) => ({
+          nodeId: issue.node_id,
+          number: issue.number,
+          title: issue.title,
+          repository: repo,
+        }))
+    );
   };
 
   /**
