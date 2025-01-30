@@ -96,9 +96,22 @@ export class GitHubService {
 
   /**
    * プロジェクトIDを取得
+   * 個人または組織のプロジェクトを取得
    */
   getProjectId = async (): Promise<string> => {
-    const query = `
+    // 組織のプロジェクトを取得するクエリ
+    const orgQuery = `
+      query($organization: String!, $number: Int!) {
+        organization(login: $organization) {
+          projectV2(number: $number) {
+            id
+          }
+        }
+      }
+    `;
+
+    // 個人のプロジェクトを取得するクエリ
+    const userQuery = `
       query($username: String!, $number: Int!) {
         user(login: $username) {
           projectV2(number: $number) {
@@ -108,11 +121,26 @@ export class GitHubService {
       }
     `;
 
-    const response: ProjectResponse = await this.octokit.graphql(query, {
-      username: this.config.organization,
-      number: this.config.projectNumber,
-    });
-
-    return response.user.projectV2.id;
+    try {
+      // まず組織としてプロジェクトの取得を試みる
+      const orgResponse: ProjectResponse = await this.octokit.graphql(orgQuery, {
+        organization: this.config.organization,
+        number: this.config.projectNumber,
+      });
+      const orgId = orgResponse.organization?.projectV2?.id;
+      if (orgId) return orgId;
+      throw new Error("Organization project not found");
+    } catch (_error) {
+      // 組織として取得できない場合は個人プロジェクトとして取得を試みる
+      const userResponse: ProjectResponse = await this.octokit.graphql(userQuery, {
+        username: this.config.organization,
+        number: this.config.projectNumber,
+      });
+      const userId = userResponse.user?.projectV2?.id;
+      if (!userId) {
+        throw new Error("Project not found in either organization or user context");
+      }
+      return userId;
+    }
   };
 }

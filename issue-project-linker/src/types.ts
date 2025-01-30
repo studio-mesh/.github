@@ -26,7 +26,12 @@ export interface Issue {
 }
 
 export interface ProjectResponse {
-  user: {
+  user?: {
+    projectV2: {
+      id: string;
+    };
+  };
+  organization?: {
     projectV2: {
       id: string;
     };
