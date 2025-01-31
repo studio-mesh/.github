@@ -126,8 +126,12 @@
 ### 開発コマンド
 
 ```bash
-# ビルド(フォーマット、リント、TypeScriptコンパイル)
+# ビルド(フォーマット・リントチェックとTypeScriptコンパイル)
+# フォーマットやリントの問題がある場合はビルドが失敗します
 npm run build
 
+# コードの問題を自動修正
+npm run fix
+
 # 実行
-npm start
+npm run start
