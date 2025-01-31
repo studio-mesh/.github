@@ -5,7 +5,7 @@
   },
   "linter": {
     "enabled": true,
-    "ignore": [".vscode/**", "dist/**"],
+    "ignore": [".vscode/**", "dist/**", "issue-project-linker/dist/**"],
     "rules": {
       "recommended": true,
       "correctness": {

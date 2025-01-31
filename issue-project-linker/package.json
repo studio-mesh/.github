@@ -9,10 +9,9 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "npm run lint && npm run format && tsc",
+    "build": "biome check . && tsc",
     "start": "node dist/index.js",
-    "lint": "biome lint .",
-    "format": "biome format . --write"
+    "fix": "biome check . --write"
   },
   "dependencies": {
     "@octokit/rest": "^21.1.0",

@@ -13,7 +13,22 @@
 
 - Node.js 20.x
 - npm
-- GitHub Personal Access Token（`repo`と`project`スコープが必要）
+- GitHub Personal Access Token(`repo`と`project`スコープが必要)
+
+## Personal Access Tokenの作成手順
+
+1. GitHubにログインし、右上のプロフィールアイコンから"Settings"を選択
+2. 左サイドバーの一番下にある"Developer settings"をクリック
+3. 左サイドバーの"Personal access tokens" > "Tokens (classic)"を選択
+4. "Generate new token"から"Generate new token (classic)"をクリック
+5. 以下の設定で新しいトークンを生成:
+   - Note: 任意の名前(例:Issue Project Linker)
+   - Expiration: トークンの有効期限を選択
+   - Select scopes:
+     - `repo`: すべてにチェック
+     - `project`: すべてにチェック
+6. "Generate token"をクリックしてトークンを生成
+7. 生成されたトークンを安全な場所に保存(この画面を閉じると二度とトークンを表示できません)
 
 ## セットアップ
 
@@ -37,7 +52,7 @@
    # .envファイルを編集し、必要な情報を設定
    ```
    ```env
-   GITHUB_TOKEN=your_github_token_here
+   PAT_GITHUB=your_github_token_here
    ORGANIZATION_NAME=your_owner_name
    PROJECT_NUMBER=your_project_number
    REPOSITORY_SCOPE=owner
@@ -68,82 +83,55 @@
 
 ### GitHub Actionsの設定
 
-1. GitHub Appの作成
-   1. GitHubの設定画面へアクセス
-      - プロファイル写真 > Your organizations > 組織の Settings
-   2. Developer settings > GitHub Apps > New GitHub App をクリック
-   3. アプリの基本情報を設定
-      - GitHub App name: アプリの名前を入力
-      - Homepage URL: リポジトリのURLまたは所有者のプロフィールURL
-   4. 権限の設定
-      - Repository permissions:
-        - Contents: Read-only
-        - Projects: Read & write
-   5. Create GitHub App をクリック
-
-2. 秘密鍵の生成
-   - GitHub Appの設定ページで Private keys セクションを開く
-   - Generate a private key をクリックして秘密鍵を生成・ダウンロード
-
-3. GitHub Appのインストール
-   - GitHub Appの設定ページで Install App タブをクリック
-   - インストール先の組織を選択
-   - Repository access で このリポジトリを選択
-   - Install をクリック
-
-4. シークレットと変数の設定
+1. シークレットと変数の設定
    - リポジトリの"Settings" > "Security" > "Secrets and variables" > "Actions"を選択
-   - シークレットの設定：
-     - `APP_PRIVATE_KEY`: ダウンロードした秘密鍵の内容（シークレットとして設定）
-   - 変数の設定：
-     - `APP_ID`: GitHub AppのApp ID（変数として設定）
-     - `ORGANIZATION_NAME`: GitHubのオーナー名（変数として設定）
-     - `PROJECT_NUMBER`: GitHubプロジェクトの番号（変数として設定）
-     - `REPOSITORY_SCOPE`: リポジトリ取得のスコープ（変数として設定）
-
-注意: GitHub Actionsで実行する場合、GitHub Appによって自動的に発行される`GITHUB_TOKEN`が提供されるため、別途設定する必要はありません。このトークンには実行に必要な権限が付与されています。
+   - シークレットの設定:
+     - `PAT_GITHUB`: GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要)
+   - 変数の設定:
+     - `ORGANIZATION_NAME`: GitHubのオーナー名(変数として設定)
+     - `PROJECT_NUMBER`: GitHubプロジェクトの番号(変数として設定)
+     - `REPOSITORY_SCOPE`: リポジトリ取得のスコープ(変数として設定)
 
 ## 環境変数
 
 ### ローカル実行時の環境変数
 
-| 変数名            | 説明                                                                                             | 必須 | デフォルト値 |
-| ----------------- | ------------------------------------------------------------------------------------------------ | ---- | ------------ |
-| ORGANIZATION_NAME | GitHubのオーナー（個人用：ユーザー名、組織用：組織名）                                           | ✅    | -            |
-| GITHUB_TOKEN      | GitHubのPersonal Access Token（リポジトリ読み取り、プロジェクト書き込み権限が必要）              | ✅    | -            |
-| PROJECT_NUMBER    | GitHubプロジェクトの番号                                                                         | -    | 1            |
-| REPOSITORY_SCOPE  | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | -    | owner        |
+| 変数名            | 説明                                                                                           | 必須 |
+| ----------------- | ---------------------------------------------------------------------------------------------- | ---- |
+| ORGANIZATION_NAME | GitHubのオーナー(個人用:ユーザー名、組織用:組織名)                                             | ✅    |
+| PAT_GITHUB        | GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要)              | ✅    |
+| PROJECT_NUMBER    | GitHubプロジェクトの番号                                                                       | ✅    |
+| REPOSITORY_SCOPE  | リポジトリ取得のスコープ(owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可) | ✅    |
 
 ### GitHub Actions実行時の環境変数
 
 #### シークレットとして設定が必要な変数
 セキュリティ上重要な情報のため、シークレットとして設定する必要があります。
 
-| 変数名          | 説明         | 必須 |
-| --------------- | ------------ | ---- |
-| APP_PRIVATE_KEY | 秘密鍵の内容 | ✅    |
+| 変数名     | 説明                                                                              | 必須 |
+| ---------- | --------------------------------------------------------------------------------- | ---- |
+| PAT_GITHUB | GitHubのPersonal Access Token(リポジトリ読み取り、プロジェクト書き込み権限が必要) | ✅    |
 
 #### 変数として設定が必要な変数
 公開しても問題ない設定値のため、変数として設定します。
 
-| 変数名            | 説明                                                                                             | 必須 | デフォルト値 |
-| ----------------- | ------------------------------------------------------------------------------------------------ | ---- | ------------ |
-| APP_ID            | GitHub AppのApp ID                                                                               | ✅    | -            |
-| ORGANIZATION_NAME | GitHubのオーナー（個人用：ユーザー名、組織用：組織名）                                           | ✅    | -            |
-| PROJECT_NUMBER    | GitHubプロジェクトの番号                                                                         | -    | 1            |
-| REPOSITORY_SCOPE  | リポジトリ取得のスコープ（owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可） | -    | owner        |
-
-注意: GitHub Actions実行時は、GitHub Appによって自動的に`GITHUB_TOKEN`が提供されるため、別途設定する必要はありません。
+| 変数名            | 説明                                                                                           | 必須 |
+| ----------------- | ---------------------------------------------------------------------------------------------- | ---- |
+| ORGANIZATION_NAME | GitHubのオーナー(個人用:ユーザー名、組織用:組織名)                                             | ✅    |
+| PROJECT_NUMBER    | GitHubプロジェクトの番号                                                                       | ✅    |
+| REPOSITORY_SCOPE  | リポジトリ取得のスコープ(owner: 個人、organization_member: 所属組織。カンマ区切りで複数指定可) | ✅    |
 
 ## 開発
 
-### リントの実行
+### 開発コマンド
 
 ```bash
-npm run lint
-```
+# ビルド(フォーマット・リントチェックとTypeScriptコンパイル)
+# フォーマットやリントの問題がある場合はビルドが失敗します
+npm run build
 
-### コードのフォーマット
+# コードの問題を自動修正
+npm run fix
 
-```bash
-npm run format
+# 実行
+npm run start

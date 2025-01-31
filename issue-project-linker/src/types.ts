@@ -10,7 +10,7 @@ export interface Config {
   token: string;
   organization: string;
   projectNumber: number;
-  affiliation?: RepositoryAffiliation;
+  affiliation: RepositoryAffiliation;
 }
 
 export interface Repository {
@@ -26,7 +26,12 @@ export interface Issue {
 }
 
 export interface ProjectResponse {
-  user: {
+  user?: {
+    projectV2: {
+      id: string;
+    };
+  };
+  organization?: {
     projectV2: {
       id: string;
     };
