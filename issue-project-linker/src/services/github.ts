@@ -3,6 +3,7 @@ import type {
   Config,
   Issue,
   OctokitIssue,
+  OctokitPullRequest,
   OctokitRepo,
   ProjectResponse,
   Repository,
@@ -148,5 +149,29 @@ export class GitHubService {
       }
       return userId;
     }
+  };
+
+  /**
+   * Dependabotが作成したオープンなPull Requestを取得
+   */
+  getDependabotPullRequests = async (
+    repo: Repository["name"],
+    owner: Repository["owner"]
+  ): Promise<Issue[]> => {
+    const { data: pulls } = await this.octokit.pulls.list({
+      owner: owner,
+      repo: repo,
+      state: "open",
+      per_page: 100,
+    });
+
+    return pulls
+      .filter((pull: OctokitPullRequest) => pull.user?.login === "dependabot[bot]")
+      .map((pull: OctokitPullRequest) => ({
+        nodeId: pull.node_id,
+        number: pull.number,
+        title: pull.title,
+        repository: repo,
+      }));
   };
 }

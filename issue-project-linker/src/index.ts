@@ -42,17 +42,18 @@ const validateAndCreateConfig = (): Config => {
 };
 
 /**
- * リポジトリのIssueをプロジェクトにリンクする
+ * リポジトリのIssueとDependabotのPRをプロジェクトにリンクする
  */
 const linkIssuesToProject = async (config: Config) => {
   const githubService = new GitHubService(config);
 
-  // リポジトリを取得（affiliationパラメータで取得スコープを制御）
+  // リポジトリを取得(affiliationパラメータで取得スコープを制御)
   const repositories = await githubService.getAuthenticatedUserRepositories();
   console.info(`Found ${repositories.length} repositories`);
 
-  // 各リポジトリのオープンIssueを取得し、プロジェクトに追加
+  // 各リポジトリのオープンIssueとDependabotのPRを取得し、プロジェクトに追加
   for (const repo of repositories) {
+    // Issueの処理
     const issues = await githubService.getOpenIssues(repo.name, repo.owner);
     console.info(`Found ${issues.length} open issues in ${repo.name}`);
 
@@ -64,9 +65,22 @@ const linkIssuesToProject = async (config: Config) => {
         console.error(`Failed to add issue #${issue.number} from ${repo.name}:`, error);
       }
     }
+
+    // Dependabotが作成したPRの処理
+    const dependabotPRs = await githubService.getDependabotPullRequests(repo.name, repo.owner);
+    console.info(`Found ${dependabotPRs.length} Dependabot PRs in ${repo.name}`);
+
+    for (const pr of dependabotPRs) {
+      try {
+        await githubService.addIssueToProject(pr);
+        console.info(`Added Dependabot PR #${pr.number} from ${repo.name} to project`);
+      } catch (error) {
+        console.error(`Failed to add Dependabot PR #${pr.number} from ${repo.name}:`, error);
+      }
+    }
   }
 
-  console.info("Successfully completed issue linking process");
+  console.info("Successfully completed issue and Dependabot PR linking process");
 };
 
 // メイン処理
