@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import { GitHubService } from "./services/github.js";
-import type { Config, RepositoryAffiliation } from "./types.js";
+import type { Config, Issue, RepositoryAffiliation } from "./types.js";
 
 // 環境変数の読み込み
 dotenv.config();
@@ -42,31 +42,60 @@ const validateAndCreateConfig = (): Config => {
 };
 
 /**
- * リポジトリのIssueをプロジェクトにリンクする
+ * IssueまたはPRをプロジェクトに追加し、結果をログ出力する
  */
-const linkIssuesToProject = async (config: Config) => {
+const addItemToProject = async (
+  githubService: GitHubService,
+  item: Issue,
+  repoName: string,
+  itemType: "issue" | "PR"
+) => {
+  try {
+    await githubService.addIssueToProject(item);
+    console.info(`[${repoName}] Added ${itemType} #${item.number} to project`);
+  } catch (error) {
+    console.error(`[${repoName}] Failed to add ${itemType} #${item.number}:`, error);
+  }
+};
+
+/**
+ * 単一リポジトリのIssueとDependabot PRをプロジェクトに追加する
+ */
+const addRepositoryItems = async (
+  githubService: GitHubService,
+  repo: { name: string; owner: string }
+) => {
+  // オープンIssueの処理
+  const issues = await githubService.getOpenIssues(repo.name, repo.owner);
+  console.info(`[${repo.name}] Found ${issues.length} open issues`);
+  for (const issue of issues) {
+    await addItemToProject(githubService, issue, repo.name, "issue");
+  }
+
+  // DependabotのPRの処理
+  const dependabotPRs = await githubService.getDependabotPullRequests(repo.name, repo.owner);
+  console.info(`[${repo.name}] Found ${dependabotPRs.length} Dependabot PRs`);
+  for (const pr of dependabotPRs) {
+    await addItemToProject(githubService, pr, repo.name, "PR");
+  }
+};
+
+/**
+ * リポジトリのIssueとDependabot PRをプロジェクトにリンクする
+ */
+const linkRepositoryItemsToProject = async (config: Config) => {
   const githubService = new GitHubService(config);
 
-  // リポジトリを取得（affiliationパラメータで取得スコープを制御）
+  // リポジトリを取得(affiliationパラメータで取得スコープを制御)
   const repositories = await githubService.getAuthenticatedUserRepositories();
   console.info(`Found ${repositories.length} repositories`);
 
-  // 各リポジトリのオープンIssueを取得し、プロジェクトに追加
+  // 各リポジトリの処理
   for (const repo of repositories) {
-    const issues = await githubService.getOpenIssues(repo.name, repo.owner);
-    console.info(`Found ${issues.length} open issues in ${repo.name}`);
-
-    for (const issue of issues) {
-      try {
-        await githubService.addIssueToProject(issue);
-        console.info(`Added issue #${issue.number} from ${repo.name} to project`);
-      } catch (error) {
-        console.error(`Failed to add issue #${issue.number} from ${repo.name}:`, error);
-      }
-    }
+    await addRepositoryItems(githubService, repo);
   }
 
-  console.info("Successfully completed issue linking process");
+  console.info("Successfully completed issue and Dependabot PR linking process");
 };
 
 // メイン処理
@@ -75,7 +104,7 @@ const main = async () => {
     // 環境変数の検証と設定の初期化
     const config = validateAndCreateConfig();
 
-    await linkIssuesToProject(config);
+    await linkRepositoryItemsToProject(config);
   } catch (error) {
     console.error("Error occurred:", error);
     process.exit(1);

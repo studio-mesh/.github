@@ -5,6 +5,7 @@ export type RepositoryAffiliation = "owner" | "organization_member";
 export type OctokitRepo =
   RestEndpointMethodTypes["repos"]["listForAuthenticatedUser"]["response"]["data"][0];
 export type OctokitIssue = RestEndpointMethodTypes["issues"]["listForRepo"]["response"]["data"][0];
+export type OctokitPullRequest = RestEndpointMethodTypes["pulls"]["list"]["response"]["data"][0];
 
 export interface Config {
   token: string;
